@@ -23,13 +23,13 @@ export const Sessions = () => {
 
 
 	useEffect(() => {
-		actions.getAllJivamukti();
+		actions.getAllSessions();
 		// actions.getAllPlanets();
 		// actions.getAllSpecies();
 		// actions.getFavorites();
 	}, []);
 
-
+	console.log(store.jivamuktiYoga)
 
 
 	return (
@@ -71,8 +71,8 @@ export const Sessions = () => {
 				</div>
 				<div className="container-fluid d-flex flex-row">
 						<ul className="d-flex flex-nowrap flex-row overflow-scroll gap-3 px-0 mx-2">
-							{store.jivamuktiYoga.map(item => (
-							<li className="col-4 px-0 w-auto my-2" key={item.id}>
+							{store.jivamuktiYoga.map(item => ( 
+							 <li className="col-4 px-0 w-auto my-2" key={item.id}>
 							<JivamuktiCard 
 								id={item.id}
 								name={item.name}

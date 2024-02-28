@@ -37,7 +37,7 @@ export const Formulario = () => {
         /*añadimos esto para poder meter en toast*/
         <>
             <ToastContainer />
-            <form className="stylebackgroundimg d-flex flex-column justify-content-center h-100 align-items-center opacity-50 p-5" onSubmit={handleLogin}>
+            <form className="stylebackgroundimg d-flex flex-column justify-content-center h-100 align-items-center opacity-50 p-5 m-5" onSubmit={handleLogin}>
                 <div className="text-center col-11 col-sm-6 col-lg-4 mb-5">
                     <div className="card-body">
                         <h1 style={{ fontFamily: 'Poiret One' }}>Login Om</h1>

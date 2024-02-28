@@ -10,7 +10,6 @@ class User(db.Model):
     date_of_birth = db.Column(db.String(120), unique=False, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
-    role = db.Column(db.Enum('Student', 'Instructor', name='role'), unique=False, nullable=True)
 
     id_subscription = db.Column(db.Integer, db.ForeignKey('subscription.id'))
     subscription = db.relationship('Subscription', backref='user', lazy=True)
@@ -77,7 +76,7 @@ class Testimony(db.Model):
 class Types_of_session(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.String(120), unique=True, nullable=False)
-    description = db.Column(db.String(500), unique=False, nullable=False)
+    description = db.Column(db.String(1000), unique=False, nullable=False)
 
     def __repr__(self):
         return f'{self.type}'
@@ -152,7 +151,7 @@ class Jivamukti_yoga(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=False, nullable=False)
     subtitle = db.Column(db.String(120), unique=False, nullable=False)
-    description = db.Column(db.String(120), unique=False, nullable=False)
+    description = db.Column(db.String(500), unique=False, nullable=False)
     link = db.Column(db.String(120), unique=True, nullable=False)
     asana_focus = db.Column(db.String(120), unique=False, nullable=False)
     level = db.Column(db.String(120), unique=False, nullable=False)
@@ -189,7 +188,7 @@ class Vinyasa_yoga(db.Model):
     name = db.Column(db.String(120), unique=False, nullable=False)
     subtitle = db.Column(db.String(120), unique=False, nullable=False)
     description = db.Column(db.String(120), unique=False, nullable=False)
-    link = db.Column(db.String(120), unique=True, nullable=False)
+    link = db.Column(db.String(500), unique=True, nullable=False)
     asana_focus = db.Column(db.String(120), unique=False, nullable=False)
     level = db.Column(db.String(120), unique=False, nullable=False)
     duration = db.Column(db.String(120), unique=False, nullable=False)
@@ -224,7 +223,7 @@ class Rocket_yoga(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=False, nullable=False)
     subtitle = db.Column(db.String(120), unique=False, nullable=False)
-    description = db.Column(db.String(120), unique=False, nullable=False)
+    description = db.Column(db.String(500), unique=False, nullable=False)
     link = db.Column(db.String(120), unique=True, nullable=False)
     asana_focus = db.Column(db.String(120), unique=False, nullable=False)
     level = db.Column(db.String(120), unique=False, nullable=False)
@@ -249,8 +248,8 @@ class Rocket_yoga(db.Model):
             "asana_focus": self.asana_focus,
             "level": self.level,
             "duration": self.duration,
-            "type": self.type.serialize(), #Para serializar el modelo types_of_session. Si no da error al ser otro modelo
-            "instructor": self.instructor.serialize()
+            "type": self.type.type, #Para serializar el modelo types_of_session. Si no da error al ser otro modelo
+            "instructor": self.instructor.name + ' ' + self.instructor.last_name
         }
 
 
@@ -328,10 +327,8 @@ class Meditation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=False, nullable=False)
     subtitle = db.Column(db.String(120), unique=False, nullable=False)
-    description = db.Column(db.String(120), unique=False, nullable=False)
+    description = db.Column(db.String(500), unique=False, nullable=False)
     link = db.Column(db.String(120), unique=True, nullable=False)
-    asana_focus = db.Column(db.String(120), unique=False, nullable=False)
-    level = db.Column(db.String(120), unique=False, nullable=False)
     duration = db.Column(db.String(120), unique=False, nullable=False)
     url_imagen = db.Column(db.String(350), unique=False, nullable=False)
     id_type_of_session = db.Column(db.Integer, db.ForeignKey('types_of_session.id'))
@@ -350,8 +347,6 @@ class Meditation(db.Model):
             "subtitle": self.subtitle,
             "description": self.description,
             "link": self.link,
-            "asana_focus": self.asana_focus,
-            "level": self.level,
             "duration": self.duration,
             "type": self.type.serialize(), #Para serializar el modelo types_of_session. Si no da error al ser otro modelo
             "instructor": self.instructor.serialize()
@@ -362,10 +357,8 @@ class Harmonium(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=False, nullable=False)
     subtitle = db.Column(db.String(120), unique=False, nullable=False)
-    description = db.Column(db.String(120), unique=False, nullable=False)
+    description = db.Column(db.String(500), unique=False, nullable=False)
     link = db.Column(db.String(120), unique=True, nullable=False)
-    asana_focus = db.Column(db.String(120), unique=False, nullable=False)
-    level = db.Column(db.String(120), unique=False, nullable=False)
     duration = db.Column(db.String(120), unique=False, nullable=False)
     url_imagen = db.Column(db.String(350), unique=False, nullable=False)
     id_type_of_session = db.Column(db.Integer, db.ForeignKey('types_of_session.id'))
@@ -384,8 +377,6 @@ class Harmonium(db.Model):
             "subtitle": self.subtitle,
             "description": self.description,
             "link": self.link,
-            "asana_focus": self.asana_focus,
-            "level": self.level,
             "duration": self.duration,
             "type": self.type.serialize(), #Para serializar el modelo types_of_session. Si no da error al ser otro modelo
             "instructor": self.instructor.serialize()

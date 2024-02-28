@@ -103,76 +103,192 @@ def get_sessions():
     # create_access_token() function is used to actually generate the JWT.
 
 #endpoint para que aparezcan las clases de jivamukti
-@api.route('/jivamuktiyoga', methods=['GET'])
-def get_jivamukti():    
-    jivamukti_query = Jivamukti_yoga.query.all()
-    jivamukti_query = list(map(lambda item: item.serialize(), jivamukti_query))
+@api.route('/yogatype', methods=['GET'])
+def get_yogatype():    
+    yogatype_1_query = Jivamukti_yoga.query.all()
+    yogatype_2_query = Vinyasa_yoga.query.all()
+    yogatype_3_query = Rocket_yoga.query.all()
+    yogatype_4_query = Ashtanga_yoga.query.all()
+    yogatype_5_query = Hatha_yoga.query.all()
+
+    yogatype_1_query = list(map(lambda item: item.serialize(),  yogatype_1_query))
+    yogatype_2_query = list(map(lambda item: item.serialize(),  yogatype_2_query))
+    yogatype_3_query = list(map(lambda item: item.serialize(),  yogatype_3_query))
+    yogatype_4_query = list(map(lambda item: item.serialize(),  yogatype_4_query))
+    yogatype_5_query = list(map(lambda item: item.serialize(),  yogatype_5_query))
+
     # print(jivamukti_query)    
-    if jivamukti_query == [] or None:
+    if yogatype_1_query == [] or None:
+        return jsonify({
+             "Msg": "No hay sesiones disponibles"
+             }), 404
+
+    if yogatype_2_query == [] or None:
+        return jsonify({
+             "Msg": "No hay sesiones disponibles"
+             }), 404
+    
+    if yogatype_3_query == [] or None:
+        return jsonify({
+             "Msg": "No hay sesiones disponibles"
+             }), 404
+
+    if yogatype_4_query == [] or None:
+        return jsonify({
+             "Msg": "No hay sesiones disponibles"
+             }), 404
+
+    if yogatype_5_query == [] or None:
         return jsonify({
              "Msg": "No hay sesiones disponibles"
              }), 404
         
     response_body = {
         "msg": "ok",
-        "jivamukti_sessions": jivamukti_query    }    
-        
+        "jivamukti_sessions": yogatype_1_query, 
+        "vinyasa_sessions": yogatype_2_query, 
+        "rocket_sessions": yogatype_3_query, 
+        "ashtanga_sessions": yogatype_4_query,
+        "hatha_sessions": yogatype_5_query, 
+    }        
     return jsonify(response_body), 200
 
-#Endpoint para que aparezca un jivamukti yoga especifico
-@api.route('/jivamuktiyoga/<int:jivamukti_id>', methods=['GET'])
+#Endpoint para que aparezca un typo de yoga con su id yoga especifico
+@api.route('/<string:yogatype>/<int:yogatype_id>', methods=['GET'])
 # Si devuelve ok aparecerá en la consola de vscode el numero de id.
-def get_one_jivamukti(jivamukti_id):
-    jivamukti_query = Jivamukti_yoga.query.filter_by(id = jivamukti_id).first() #El filter sera con el id, no se podrá repetir
+def get_one_yoga_session(yogatype, yogatype_id):
+    if (yogatype == 'jivamuktiyoga'):
+        jivamukti_query = Jivamukti_yoga.query.filter_by(id = yogatype_id).first() #El filter sera con el id, no se podrá repetir
     # Te lo devuelve en crudo.
     
-    if jivamukti_query is None:
-        return jsonify({
-            "msg": "Jivamukti session not found"
-        }), 404
+        if jivamukti_query is None:
+            return jsonify({
+                "msg": "Jivamukti session not found"
+            }), 404
+        
+        response_body = {
+            "msg": "ok",
+            "jivamukti_session": jivamukti_query.serialize() #Hacemos el serialize para mostrar la informacion tratada.
+        }
+        return jsonify(response_body), 200
     
-    response_body = {
-        "msg": "ok",
-        "jivamukti_session": jivamukti_query.serialize() #Hacemos el serialize para mostrar la informacion tratada.
-    }
-    return jsonify(response_body), 200
+    elif (yogatype == 'vinyasayoga'):
+        vinyasa_query = Vinyasa_yoga.query.filter_by(id = yogatype_id).first() #El filter sera con el id, no se podrá repetir
+        if vinyasa_query is None:
+            return jsonify({
+                "msg": "vinyasa session not found"
+            }), 404
+        
+        response_body = {
+            "msg": "ok",
+            "vinyasa_session": vinyasa_query.serialize() #Hacemos el serialize para mostrar la informacion tratada.
+        }
+        return jsonify(response_body), 200
+    
+    elif (yogatype == 'rocketyoga'):
+        rocket_query = Rocket_yoga.query.filter_by(id = yogatype_id).first() #El filter sera con el id, no se podrá repetir
+        # Te lo devuelve en crudo.
+        if rocket_query is None:
+            return jsonify({
+                "msg": "rocket session not found"
+            }), 404
+        
+        response_body = {
+            "msg": "ok",
+            "rocket_session": rocket_query.serialize() #Hacemos el serialize para mostrar la informacion tratada.
+        }
+        return jsonify(response_body), 200 
 
-#endpoint para que aparezcan las clases de vinyasa
-@api.route('/vinyasayoga', methods=['GET'])
-def get_vinyasa():    
-    vinyasa_query = Vinyasa_yoga.query.all()
-    vinyasa_query = list(map(lambda item: item.serialize(), vinyasa_query))
-    # print(jivamukti_query)    
-    if vinyasa_query == [] or None:
+
+
+    elif (yogatype == 'ashtangayoga'):
+        ashtanga_query = Ashtanga_yoga.query.filter_by(id = yogatype_id).first() #El filter sera con el id, no se podrá repetir
+        # Te lo devuelve en crudo.
+        if ashtanga_query is None:
+            return jsonify({
+                "msg": "ashtanga session not found"
+            }), 404
+        
+        response_body = {
+            "msg": "ok",
+            "ashtanga_session": ashtanga_query.serialize() #Hacemos el serialize para mostrar la informacion tratada.
+        }
+        return jsonify(response_body), 200 
+
+    elif (yogatype == 'hathagayoga'):
+        hatha_query = Hatha_yoga.query.filter_by(id = yogatype_id).first() #El filter sera con el id, no se podrá repetir
+        # Te lo devuelve en crudo.
+        if hatha_query is None:
+            return jsonify({
+                "msg": "hatha session not found"
+            }), 404
+        
+        response_body = {
+            "msg": "ok",
+            "hatha_session": hatha_query.serialize() #Hacemos el serialize para mostrar la informacion tratada.
+        }
+        return jsonify(response_body), 200 
+    
+#endpoint para que aparezcan las clases de meditation o harmonium
+@api.route('/othersessiontype', methods=['GET'])
+def get_meditation_or_harmonium():    
+    meditation_query = Meditation.query.all()
+    harmonium_query = Harmonium.query.all()
+
+    meditation_query = list(map(lambda item: item.serialize(),  meditation_query))
+    harmonium_query = list(map(lambda item: item.serialize(),  harmonium_query))
+
+    # print(harmonium_query_query)    
+    if meditation_query == [] or None:
         return jsonify({
-             "Msg": "No hay sesiones Vinyasa disponibles"
+             "Msg": "No hay sesiones meditation disponibles"
+             }), 404
+
+    if harmonium_query == [] or None:
+        return jsonify({
+             "Msg": "No hay sesiones harmonium disponibles"
              }), 404
         
     response_body = {
         "msg": "ok",
-        "vinyasa_sessions": vinyasa_query    }    
-        
+        "meditation_sessions": meditation_query, 
+        "harmonium_sessions": harmonium_query, 
+    }        
     return jsonify(response_body), 200
 
 
-#Endpoint para que aparezca un vinyasa yoga especifico
-@api.route('/vinyasayoga/<int:vinyasa_id>', methods=['GET'])
+#Endpoint para que aparezca un typo de meditacion o harmonium con su id yoga especifico
+@api.route('/<string:othersessiontype>/<int:othersessiontype_id>', methods=['GET'])
 # Si devuelve ok aparecerá en la consola de vscode el numero de id.
-def get_one_vinyasa(vinyasa_id):
-    vinyasa_query = Vinyasa_yoga.query.filter_by(id = vinyasa_id).first() #El filter sera con el id, no se podrá repetir
+def get_one_harmonium_or_meditation(othersessiontype, othersessiontype_id):
+    if (othersessiontype == 'meditation'):
+        meditation_query = Meditation.query.filter_by(id = othersessiontype_id).first() #El filter sera con el id, no se podrá repetir
     # Te lo devuelve en crudo.
-    if vinyasa_query is None:
-        return jsonify({
-            "msg": "vinyasa session not found"
-        }), 404
     
-    response_body = {
-        "msg": "ok",
-        "vinyasa_session": vinyasa_query.serialize() #Hacemos el serialize para mostrar la informacion tratada.
-    }
-    return jsonify(response_body), 200 
-
-
+        if meditation_query is None:
+            return jsonify({
+                "msg": "meditation session not found"
+            }), 404
+        
+        response_body = {
+            "msg": "ok",
+            "meditation_session": meditation_query.serialize() #Hacemos el serialize para mostrar la informacion tratada.
+        }
+        return jsonify(response_body), 200
+    
+    elif (othersessiontype == 'harmonium'):
+        harmonium_query = Harmonium.query.filter_by(id = othersessiontype_id).first() #El filter sera con el id, no se podrá repetir
+        if harmonium_query is None:
+            return jsonify({
+                "msg": "harmonium session not found"
+            }), 404
+        
+        response_body = {
+            "msg": "ok",
+            "harmonium_session": harmonium_query.serialize() #Hacemos el serialize para mostrar la informacion tratada.
+        }
+        return jsonify(response_body), 200
+    
 
 #endpoint para registrarse
 @api.route("/signup", methods=["POST"])
@@ -190,7 +306,7 @@ def signup():
     date_of_birth = data.get('date_of_birth')
     role = data.get('role')
     subscription_start_date = datetime.today() #para que aparezca la fecha de registro en la fecha actual de rellenar el formulario
-    plan = data.get('plan')
+    plan = Subscription.query.filter_by(plan='Monthly').first() #seleccionamos la opcion del plan Free Trial
     last_payment_date = ''
     next_payment_date = ''
     is_subscription_active = True
@@ -200,8 +316,8 @@ def signup():
     if not email or not password or not name or not last_name or not date_of_birth or not role:
         return jsonify({'Error': 'All the fields are required'}), 400    # Example database interaction (using SQLAlchemy)
     
-    if plan == "Free Trial":
-        next_payment_date = subscription_start_date + timedelta(days=4) #que el proximo pago sea 3 dias después de registrarse
+    # if plan == "Free Trial":
+    #     next_payment_date = subscription_start_date + timedelta(days=4) #que el proximo pago sea 3 dias después de registrarse
     else:
         last_payment_date = subscription_start_date
         next_payment_date = subscription_start_date + timedelta(days=30)
@@ -216,7 +332,8 @@ def signup():
         subscription_start_date=subscription_start_date,
         next_payment_date=next_payment_date,
         last_payment_date=last_payment_date,
-        is_subscription_active=is_subscription_active
+        is_subscription_active=is_subscription_active,
+        plan=plan,
         )
     
 

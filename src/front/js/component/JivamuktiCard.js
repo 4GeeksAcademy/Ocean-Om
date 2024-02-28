@@ -40,7 +40,7 @@ export const JivamuktiCard = (props) => {
 
 JivamuktiCard.propTypes = {
 	history: PropTypes.object,
-	id: PropTypes.string,
+	id: PropTypes.number,
 	instructor: PropTypes.string,
 	level: PropTypes.string,
 	asanafocus: PropTypes.string,

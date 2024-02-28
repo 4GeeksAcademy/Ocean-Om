@@ -5,18 +5,16 @@ import { BackendURL } from "./component/backendURL";
 
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
-import { SingleHathaYogaDetails } from "./pages/SingleHathaYogaDetails.js";
-import { SingleJivamutkiYogaDetails } from "./pages/SingleJivamutkiYogaDetails.js";
-import { SingleVinyasaYogaDetails } from "./pages/SingleVinyasaYogaDetails.js";
+import { SingleSessionYogaDetails } from "./pages/SingleSessionYogaDetails.js";
+import { SingleSessionMeditationHarmoniumDetails } from "./pages/SingleSessionMeditationHarmoniumDetails.js";
 import injectContext from "./store/appContext";
 import { Login } from "./pages/login"; 
 import { Sessions } from "./pages/classes";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-// import { HathaYogaDetailsCard } from "./component/HathaYogaDetailsCard.js";
 
-//create your first component
+
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
     // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
@@ -32,13 +30,11 @@ const Layout = () => {
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Demo />} path="/demo" />
-                        {/* <Route element={<SingleMeditationDetails />} path="/meditation/:theid" /> */}
-                        {/* <Route element={<SingleMeditationDetails />} path="/harmonium/:theid" /> */}
-                        <Route path="/hathayoga/:theid" element={<SingleHathaYogaDetails />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/sessions" element={<Sessions />} />
-                        <Route path="/jivamuktiyoga/:theid" element={<SingleJivamutkiYogaDetails />} />
-                        <Route path="/vinyasayoga/:theid" element={<SingleVinyasaYogaDetails />} />
+                        <Route path="/:yogatype/:theid" element={<SingleSessionYogaDetails />} />
+                        <Route path="/:othersessiontype/:theid" element={<SingleSessionMeditationHarmoniumDetails />} />
+                        {/* <Route path="/:yogatype/:theid" element={<SingleSessionYogaDetails />} /> */}
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
