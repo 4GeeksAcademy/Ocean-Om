@@ -71,8 +71,17 @@ export const SessionYogaDetailsCard = props => {
                         </button>
                     </div>
                 </div>
-                <div className="col-md-6 col-sm-12 d-flex flex-column justify-content-md-center justify-content-sm-center align-items-md-end align-items-sm-center">
-                    <img className="col-11 img-fluid w-75" src="https://www.shutterstock.com/image-photo/caucasian-woman-practicing-yoga-seashore-260nw-142334290.jpg"></img>
+                <div className="col-md-6 col-sm-12 d-flex flex-column justify-content-md-center justify-content-sm-center align-items-md-end align-items-sm-center ">
+                    <img className="col-11 img-fluid w-75 rounded" src={props.url_imagen}></img>
+                    {/* <iframe
+                    width="560"  // Ancho del reproductor de video
+                    height="315" // Altura del reproductor de video
+                    src={props.link} // Reemplaza 'TU_VIDEO_ID' con el ID de tu video de YouTube
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    ></iframe> */}
                 </div>
 
             </div>

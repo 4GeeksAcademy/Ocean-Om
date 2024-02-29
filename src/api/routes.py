@@ -159,7 +159,7 @@ def get_yogatype():
 def get_one_yoga_session(yogatype, yogatype_id):
     if (yogatype == 'jivamuktiyoga'):
         jivamukti_query = Jivamukti_yoga.query.filter_by(id = yogatype_id).first() #El filter sera con el id, no se podrá repetir
-    # Te lo devuelve en crudo.
+        # Te lo devuelve en crudo.
     
         if jivamukti_query is None:
             return jsonify({
@@ -199,8 +199,6 @@ def get_one_yoga_session(yogatype, yogatype_id):
         }
         return jsonify(response_body), 200 
 
-
-
     elif (yogatype == 'ashtangayoga'):
         ashtanga_query = Ashtanga_yoga.query.filter_by(id = yogatype_id).first() #El filter sera con el id, no se podrá repetir
         # Te lo devuelve en crudo.
@@ -228,6 +226,7 @@ def get_one_yoga_session(yogatype, yogatype_id):
             "hatha_session": hatha_query.serialize() #Hacemos el serialize para mostrar la informacion tratada.
         }
         return jsonify(response_body), 200 
+    # return jsonify({"msg": "Error: Invalid request"}), 400
     
 #endpoint para que aparezcan las clases de meditation o harmonium
 @api.route('/othersessiontype', methods=['GET'])
@@ -262,9 +261,8 @@ def get_meditation_or_harmonium():
 # Si devuelve ok aparecerá en la consola de vscode el numero de id.
 def get_one_harmonium_or_meditation(othersessiontype, othersessiontype_id):
     if (othersessiontype == 'meditation'):
-        meditation_query = Meditation.query.filter_by(id = othersessiontype_id).first() #El filter sera con el id, no se podrá repetir
+        meditation_query = Meditation.query.filter_by(id=othersessiontype_id).first() #El filter sera con el id, no se podrá repetir
     # Te lo devuelve en crudo.
-    
         if meditation_query is None:
             return jsonify({
                 "msg": "meditation session not found"
@@ -275,7 +273,7 @@ def get_one_harmonium_or_meditation(othersessiontype, othersessiontype_id):
             "meditation_session": meditation_query.serialize() #Hacemos el serialize para mostrar la informacion tratada.
         }
         return jsonify(response_body), 200
-    
+
     elif (othersessiontype == 'harmonium'):
         harmonium_query = Harmonium.query.filter_by(id = othersessiontype_id).first() #El filter sera con el id, no se podrá repetir
         if harmonium_query is None:
@@ -289,6 +287,14 @@ def get_one_harmonium_or_meditation(othersessiontype, othersessiontype_id):
         }
         return jsonify(response_body), 200
     
+    return jsonify(response_body), 200
+
+#Endpoint para que aparezca un typo de meditacion o harmonium con su id yoga especifico prueba ya que el de arriba da error
+# @api.route('/<string:othersessiontype>/<int:othersessiontype_id>', methods=['GET'])
+# # Si devuelve ok aparecerá en la consola de vscode el numero de id.
+# def get_one_harmonium_or_meditation(othersessiontype, othersessiontype_id):
+
+
 
 #endpoint para registrarse
 @api.route("/signup", methods=["POST"])
