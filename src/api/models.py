@@ -286,8 +286,8 @@ class Ashtanga_yoga(db.Model):
             "level": self.level,
             "duration": self.duration,
             "url_imagen": self.url_imagen,
-            "type": self.type.serialize(), #Para serializar el modelo types_of_session. Si no da error al ser otro modelo
-            "instructor": self.instructor.serialize()
+            "type": self.type.type, #Para serializar el modelo types_of_session. Si no da error al ser otro modelo
+            "instructor": self.instructor.name + ' ' + self.instructor.last_name
         }
 
 
@@ -321,8 +321,8 @@ class Hatha_yoga(db.Model):
             "level": self.level,
             "duration": self.duration,
             "url_imagen": self.url_imagen,
-            "type": self.type.serialize(), #Para serializar el modelo types_of_session. Si no da error al ser otro modelo
-            "instructor": self.instructor.serialize()
+            "type": self.type.type, #Para serializar el modelo types_of_session. Si no da error al ser otro modelo
+            "instructor": self.instructor.name + ' ' + self.instructor.last_name
         }
 
 
@@ -334,6 +334,8 @@ class Meditation(db.Model):
     subtitle = db.Column(db.String(120), unique=False, nullable=False)
     description = db.Column(db.String(500), unique=False, nullable=False)
     link = db.Column(db.String(120), unique=True, nullable=False)
+    asana_focus = db.Column(db.String(120), unique=False, nullable=False)
+    level = db.Column(db.String(120), unique=False, nullable=False)
     duration = db.Column(db.String(120), unique=False, nullable=False)
     url_imagen = db.Column(db.String(350), unique=False, nullable=False)
     id_type_of_session = db.Column(db.Integer, db.ForeignKey('types_of_session.id'))
@@ -352,10 +354,12 @@ class Meditation(db.Model):
             "subtitle": self.subtitle,
             "description": self.description,
             "link": self.link,
+            "asana_focus": self.asana_focus,
+            "level": self.level,
             "duration": self.duration,
             "url_imagen": self.url_imagen,
-            "type": self.type.serialize(), #Para serializar el modelo types_of_session. Si no da error al ser otro modelo
-            "instructor": self.instructor.serialize()
+            "type": self.type.type, #Para serializar el modelo types_of_session. Si no da error al ser otro modelo
+            "instructor": self.instructor.name + ' ' + self.instructor.last_name
         }
 
 
@@ -365,6 +369,8 @@ class Harmonium(db.Model):
     subtitle = db.Column(db.String(120), unique=False, nullable=False)
     description = db.Column(db.String(500), unique=False, nullable=False)
     link = db.Column(db.String(120), unique=True, nullable=False)
+    asana_focus = db.Column(db.String(120), unique=False, nullable=False)
+    level = db.Column(db.String(120), unique=False, nullable=False)
     duration = db.Column(db.String(120), unique=False, nullable=False)
     url_imagen = db.Column(db.String(350), unique=False, nullable=False)
     id_type_of_session = db.Column(db.Integer, db.ForeignKey('types_of_session.id'))
@@ -383,8 +389,10 @@ class Harmonium(db.Model):
             "subtitle": self.subtitle,
             "description": self.description,
             "link": self.link,
+            "asana_focus": self.asana_focus,
+            "level": self.level,
             "duration": self.duration,
             "url_imagen": self.url_imagen,
-            "type": self.type.serialize(), #Para serializar el modelo types_of_session. Si no da error al ser otro modelo
-            "instructor": self.instructor.serialize()
+            "type": self.type.type, #Para serializar el modelo types_of_session. Si no da error al ser otro modelo
+            "instructor": self.instructor.name + ' ' + self.instructor.last_name
         }

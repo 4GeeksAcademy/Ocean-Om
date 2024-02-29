@@ -33,8 +33,7 @@ const Layout = () => {
                         <Route path="/login" element={<Login />} />
                         <Route path="/sessions" element={<Sessions />} />
                         <Route path="/:yogatype/:theid" element={<SingleSessionYogaDetails />} />
-                        <Route path="/:othersessiontype/:theid" element={<SingleSessionMeditationHarmoniumDetails />} />
-                        {/* <Route path="/:yogatype/:theid" element={<SingleSessionYogaDetails />} /> */}
+                        {/* <Route path="/:othersessiontype/:theid" element={<SingleSessionMeditationHarmoniumDetails />} /> */}
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />

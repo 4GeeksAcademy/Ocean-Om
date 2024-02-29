@@ -108,11 +108,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let response = await fetch(process.env.BACKEND_URL + `/api/${yogatype}/${yogatype_Id}`, {
 						method: "GET",
 					});
+					console.log(yogatype, yogatype_Id);
 					console.log(response.status);
 
 					if (response.status === 200) {
 						let data = await response.json();
-						// console.log(data);
 						const oneYogaSessionInfoWithId = {
 							...data,
 							sessionId: yogatype_Id,
@@ -132,6 +132,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 						else if (yogatype == 'hathayoga') {
 							setStore({ singleYogaSessionInfo: data.rocket_session })
+						}
+						else if (yogatype == 'meditation') {
+							setStore({ singleYogaSessionInfo: data.meditation_session })
+						}
+						else if (yogatype == 'harmonium') {
+							setStore({ singleYogaSessionInfo: data.harmonium_session })
 						}
 						return true
 					} else {
@@ -160,57 +166,57 @@ const getState = ({ getStore, getActions, setStore }) => {
             //         return false;
             //     }
             // },
-			getAllMeditation: async () => 	{
-				try {
-					const response = await fetch(process.env.BACKEND_URL + "/api/${othersessiontype}");
-					console.log(response.status);
+			// getAllMeditation: async () => 	{
+			// 	try {
+			// 		const response = await fetch(process.env.BACKEND_URL + "/api/${othersessiontype}");
+			// 		console.log(response.status);
 			
-					if (response.status === 200) {
-						const data = await response.json();
-						console.log(data);
-						setStore({ meditation: data.meditation_sessions });
-						return true;
-					} else {
-						throw new Error("Error fetching Hatha yoga data");
-					}
-				} catch (error) {
-					console.error(error);
-					return false;
-				}
+			// 		if (response.status === 200) {
+			// 			const data = await response.json();
+			// 			console.log(data);
+			// 			setStore({ meditation: data.meditation_sessions });
+			// 			return true;
+			// 		} else {
+			// 			throw new Error("Error fetching Hatha yoga data");
+			// 		}
+			// 	} catch (error) {
+			// 		console.error(error);
+			// 		return false;
+			// 	}
 
-			},
+			// },
 
-			getOneMeditationOrHamorniumType: async (othersessiontype, othersessiontype_Id) => {
-				try {
-					console.log("hola")
-					console.log("othersessiontype:", othersessiontype);
-					console.log("othersessiontype_Id:", othersessiontype_Id);
-					// let response = await fetch(process.env.BACKEND_URL + `/api/${othersessiontype}/${othersessiontype_Id}`, {
-					// 	method: "GET",
-					// });
-					// console.log(response.status);
+			// getOneMeditationOrHamorniumType: async (othersessiontype, othersessiontype_Id) => {
+			// 	try {
+			// 		console.log("hola")
+			// 		console.log("othersessiontype:", othersessiontype);
+			// 		console.log("othersessiontype_Id:", othersessiontype_Id);
+			// 		// let response = await fetch(process.env.BACKEND_URL + `/api/${othersessiontype}/${othersessiontype_Id}`, {
+			// 		// 	method: "GET",
+			// 		// });
+			// 		// console.log(response.status);
 
-					if (response.status === 200) {
-						let data = await response.json();
-						console.log(data);
-						const oneSessionInfoWithId = {
-							...data,
-							sessionId: othersessiontype_Id,
-						};
-						console.log("Updated session info:", oneSessionInfoWithId);
-						if (othersessiontype == 'meditation') {
-							setStore({ singleMeditationOrHarmoniumSessionInfo: data.meditation_session })
-						} else {
-							setStore({ singleMeditationOrHarmoniumSessionInfo: data.harmonium_session })
-						}
-					} else {
-						throw new Error("Error fetching session harmonium/meditation info");
-					}
-				} catch (err) {
-					console.error(err);
-					return false
-				}
-			},
+			// 		if (response.status === 200) {
+			// 			let data = await response.json();
+			// 			console.log(data);
+			// 			const oneSessionInfoWithId = {
+			// 				...data,
+			// 				sessionId: othersessiontype_Id,
+			// 			};
+			// 			console.log("Updated session info:", oneSessionInfoWithId);
+			// 			if (othersessiontype == 'meditation') {
+			// 				setStore({ singleMeditationOrHarmoniumSessionInfo: data.meditation_session })
+			// 			} else {
+			// 				setStore({ singleMeditationOrHarmoniumSessionInfo: data.harmonium_session })
+			// 			}
+			// 		} else {
+			// 			throw new Error("Error fetching session harmonium/meditation info");
+			// 		}
+			// 	} catch (err) {
+			// 		console.error(err);
+			// 		return false
+			// 	}
+			// },
 
 
 

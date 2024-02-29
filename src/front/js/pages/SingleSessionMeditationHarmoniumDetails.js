@@ -12,7 +12,7 @@ export const SingleSessionMeditationHarmoniumDetails = () => {
 	const params = useParams();
 
 	useEffect(() => {
-		actions.getOneMeditationOrHamorniumType(params.yogatype, params.theid)
+		actions.getOneYogatypeSession(params.yogatype, params.theid)
 		// console.log("Store in JivamutkiYogaDetailsCard:", store.singleSessionInfo.name);
 		// console.log(params.yogatype)
 		// Envias a la función la parte que coge la url dinamica y se lo pasas al flux como parametro.

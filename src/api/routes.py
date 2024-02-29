@@ -110,12 +110,18 @@ def get_yogatype():
     yogatype_3_query = Rocket_yoga.query.all()
     yogatype_4_query = Ashtanga_yoga.query.all()
     yogatype_5_query = Hatha_yoga.query.all()
+    yogatype_6_query = Meditation.query.all()
+    yogatype_7_query = Harmonium.query.all()
+
 
     yogatype_1_query = list(map(lambda item: item.serialize(),  yogatype_1_query))
     yogatype_2_query = list(map(lambda item: item.serialize(),  yogatype_2_query))
     yogatype_3_query = list(map(lambda item: item.serialize(),  yogatype_3_query))
     yogatype_4_query = list(map(lambda item: item.serialize(),  yogatype_4_query))
     yogatype_5_query = list(map(lambda item: item.serialize(),  yogatype_5_query))
+    yogatype_6_query = list(map(lambda item: item.serialize(),  yogatype_6_query))
+    yogatype_7_query = list(map(lambda item: item.serialize(),  yogatype_7_query))
+
 
     # print(jivamukti_query)    
     if yogatype_1_query == [] or None:
@@ -142,6 +148,16 @@ def get_yogatype():
         return jsonify({
              "Msg": "No hay sesiones disponibles"
              }), 404
+    
+    if yogatype_6_query == [] or None:
+        return jsonify({
+             "Msg": "No hay sesiones disponibles"
+             }), 404
+    
+    if yogatype_7_query == [] or None:
+        return jsonify({
+             "Msg": "No hay sesiones disponibles"
+             }), 404
         
     response_body = {
         "msg": "ok",
@@ -149,8 +165,10 @@ def get_yogatype():
         "vinyasa_sessions": yogatype_2_query, 
         "rocket_sessions": yogatype_3_query, 
         "ashtanga_sessions": yogatype_4_query,
-        "hatha_sessions": yogatype_5_query, 
-    }        
+        "hatha_sessions": yogatype_5_query,
+        "meditation_sessions": yogatype_6_query, 
+        "harmonium_sessions": yogatype_7_query,
+        }        
     return jsonify(response_body), 200
 
 #Endpoint para que aparezca un typo de yoga con su id yoga especifico
@@ -225,44 +243,11 @@ def get_one_yoga_session(yogatype, yogatype_id):
             "msg": "ok",
             "hatha_session": hatha_query.serialize() #Hacemos el serialize para mostrar la informacion tratada.
         }
-        return jsonify(response_body), 200 
-    # return jsonify({"msg": "Error: Invalid request"}), 400
+        return jsonify(response_body), 200
     
-#endpoint para que aparezcan las clases de meditation o harmonium
-@api.route('/othersessiontype', methods=['GET'])
-def get_meditation_or_harmonium():    
-    meditation_query = Meditation.query.all()
-    harmonium_query = Harmonium.query.all()
-
-    meditation_query = list(map(lambda item: item.serialize(),  meditation_query))
-    harmonium_query = list(map(lambda item: item.serialize(),  harmonium_query))
-
-    # print(harmonium_query_query)    
-    if meditation_query == [] or None:
-        return jsonify({
-             "Msg": "No hay sesiones meditation disponibles"
-             }), 404
-
-    if harmonium_query == [] or None:
-        return jsonify({
-             "Msg": "No hay sesiones harmonium disponibles"
-             }), 404
-        
-    response_body = {
-        "msg": "ok",
-        "meditation_sessions": meditation_query, 
-        "harmonium_sessions": harmonium_query, 
-    }        
-    return jsonify(response_body), 200
-
-
-#Endpoint para que aparezca un typo de meditacion o harmonium con su id yoga especifico
-@api.route('/<string:othersessiontype>/<int:othersessiontype_id>', methods=['GET'])
-# Si devuelve ok aparecerá en la consola de vscode el numero de id.
-def get_one_harmonium_or_meditation(othersessiontype, othersessiontype_id):
-    if (othersessiontype == 'meditation'):
-        meditation_query = Meditation.query.filter_by(id=othersessiontype_id).first() #El filter sera con el id, no se podrá repetir
-    # Te lo devuelve en crudo.
+    elif (yogatype == 'meditation'):
+        meditation_query = Meditation.query.filter_by(id = yogatype_id).first() #El filter sera con el id, no se podrá repetir
+        # Te lo devuelve en crudo.
         if meditation_query is None:
             return jsonify({
                 "msg": "meditation session not found"
@@ -273,9 +258,10 @@ def get_one_harmonium_or_meditation(othersessiontype, othersessiontype_id):
             "meditation_session": meditation_query.serialize() #Hacemos el serialize para mostrar la informacion tratada.
         }
         return jsonify(response_body), 200
-
-    elif (othersessiontype == 'harmonium'):
-        harmonium_query = Harmonium.query.filter_by(id = othersessiontype_id).first() #El filter sera con el id, no se podrá repetir
+    
+    elif (yogatype == 'harmonium'):
+        harmonium_query = Harmonium.query.filter_by(id = yogatype_id).first() #El filter sera con el id, no se podrá repetir
+        # Te lo devuelve en crudo.
         if harmonium_query is None:
             return jsonify({
                 "msg": "harmonium session not found"
@@ -285,9 +271,69 @@ def get_one_harmonium_or_meditation(othersessiontype, othersessiontype_id):
             "msg": "ok",
             "harmonium_session": harmonium_query.serialize() #Hacemos el serialize para mostrar la informacion tratada.
         }
-        return jsonify(response_body), 200
+        return jsonify(response_body), 200 
+    # return jsonify({"msg": "Error: Invalid request"}), 400
     
-    return jsonify(response_body), 200
+# #endpoint para que aparezcan las clases de meditation o harmonium
+# @api.route('/othersessiontype', methods=['GET'])
+# def get_meditation_or_harmonium():    
+#     meditation_query = Meditation.query.all()
+#     harmonium_query = Harmonium.query.all()
+
+#     meditation_query = list(map(lambda item: item.serialize(),  meditation_query))
+#     harmonium_query = list(map(lambda item: item.serialize(),  harmonium_query))
+
+#     # print(harmonium_query_query)    
+#     if meditation_query == [] or None:
+#         return jsonify({
+#              "Msg": "No hay sesiones meditation disponibles"
+#              }), 404
+
+#     if harmonium_query == [] or None:
+#         return jsonify({
+#              "Msg": "No hay sesiones harmonium disponibles"
+#              }), 404
+        
+#     response_body = {
+#         "msg": "ok",
+#         "meditation_sessions": meditation_query, 
+#         "harmonium_sessions": harmonium_query, 
+#     }        
+#     return jsonify(response_body), 200
+
+
+# #Endpoint para que aparezca un typo de meditacion o harmonium con su id yoga especifico
+# @api.route('/<string:othersessiontype>/<int:othersessiontype_id>', methods=['GET'])
+# # Si devuelve ok aparecerá en la consola de vscode el numero de id.
+# def get_one_harmonium_or_meditation(othersessiontype, othersessiontype_id):
+#     if (othersessiontype == 'meditation'):
+#         meditation_query = Meditation.query.filter_by(id=othersessiontype_id).first() #El filter sera con el id, no se podrá repetir
+#     # Te lo devuelve en crudo.
+#         if meditation_query is None:
+#             return jsonify({
+#                 "msg": "meditation session not found"
+#             }), 404
+        
+#         response_body = {
+#             "msg": "ok",
+#             "meditation_session": meditation_query.serialize() #Hacemos el serialize para mostrar la informacion tratada.
+#         }
+#         return jsonify(response_body), 200
+
+#     elif (othersessiontype == 'harmonium'):
+#         harmonium_query = Harmonium.query.filter_by(id = othersessiontype_id).first() #El filter sera con el id, no se podrá repetir
+#         if harmonium_query is None:
+#             return jsonify({
+#                 "msg": "harmonium session not found"
+#             }), 404
+        
+#         response_body = {
+#             "msg": "ok",
+#             "harmonium_session": harmonium_query.serialize() #Hacemos el serialize para mostrar la informacion tratada.
+#         }
+#         return jsonify(response_body), 200
+    
+#     return jsonify(response_body), 200
 
 #Endpoint para que aparezca un typo de meditacion o harmonium con su id yoga especifico prueba ya que el de arriba da error
 # @api.route('/<string:othersessiontype>/<int:othersessiontype_id>', methods=['GET'])

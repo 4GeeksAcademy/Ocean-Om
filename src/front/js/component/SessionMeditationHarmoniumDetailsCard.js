@@ -50,14 +50,14 @@ export const SessionMeditationHarmoniumDetailsCard = props => {
                         <h6 className="">Duration : </h6>
                         <h6 className="ms-2">{props.duration}</h6>
                     </div>
-                    <div className="col-12 d-flex flex-row">
+                    {/* <div className="col-12 d-flex flex-row">
                         <h6 className="">Asana Focus : </h6>
                         <h6 className="ms-2">{props.asana_focus}</h6>
                     </div>
                     <div className="col-12 d-flex flex-row">
                         <h6 className="">Level : </h6>
                         <h6 className="ms-2">{props.level}</h6>
-                    </div>
+                    </div> */}
                     <div className="d-flex flex-row gap-5">
                         <button type="button" className={`Name="btn btn-sm p-1 mt-4 btn-outline-ligth bg-transparent border-none d-flex align-items-start `} onMouseEnter={handleHoverInButton} onMouseLeave={handleHoverOutButton}>
                             <Link className={`btn text-dark `} to="/">
@@ -82,16 +82,16 @@ export const SessionMeditationHarmoniumDetailsCard = props => {
 
 
 SessionMeditationHarmoniumDetailsCard.propTypes = {
-	match: PropTypes.object,
+    match: PropTypes.object,
     id: PropTypes.number,
     name: PropTypes.string,
     subtitle: PropTypes.string,
     description: PropTypes.string,
-	instructor: PropTypes.string,
-	level: PropTypes.string,
-	asana_focus: PropTypes.string,
+    instructor: PropTypes.string,
+    level: PropTypes.string,
+    asana_focus: PropTypes.string,
     link: PropTypes.string,
-	url_imagen: PropTypes.string,
+    url_imagen: PropTypes.string,
     duration: PropTypes.string,
 
 

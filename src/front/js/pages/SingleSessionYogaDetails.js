@@ -20,7 +20,8 @@ export const SingleSessionYogaDetails = () => {
 	}, [])
 
 	return (
-		<div className="jumbotron align-items-center container-fluid h-100 pb-5 pt-4 stylebackground my-5">
+		<div className="jumbotron align-items-center container-fluid h-100 pb-5 pt-4 my-5">
+			{/* <div className="stylebackground "></div> */}
 			<div className=" h-100 w-100">
 				<SessionYogaDetailsCard
 					id={store.singleYogaSessionInfo.id}

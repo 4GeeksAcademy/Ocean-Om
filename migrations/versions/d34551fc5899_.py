@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 8d5f9edac755
+Revision ID: d34551fc5899
 Revises: 
-Create Date: 2024-02-27 18:36:00.969193
+Create Date: 2024-02-29 19:51:21.969942
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '8d5f9edac755'
+revision = 'd34551fc5899'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -36,7 +36,7 @@ def upgrade():
     op.create_table('types_of_session',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('type', sa.String(length=120), nullable=False),
-    sa.Column('description', sa.String(length=500), nullable=False),
+    sa.Column('description', sa.String(length=1000), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('type')
     )
@@ -61,7 +61,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=120), nullable=False),
     sa.Column('subtitle', sa.String(length=120), nullable=False),
-    sa.Column('description', sa.String(length=120), nullable=False),
+    sa.Column('description', sa.String(length=500), nullable=False),
     sa.Column('link', sa.String(length=120), nullable=False),
     sa.Column('asana_focus', sa.String(length=120), nullable=False),
     sa.Column('level', sa.String(length=120), nullable=False),
@@ -95,7 +95,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=120), nullable=False),
     sa.Column('subtitle', sa.String(length=120), nullable=False),
-    sa.Column('description', sa.String(length=120), nullable=False),
+    sa.Column('description', sa.String(length=500), nullable=False),
     sa.Column('link', sa.String(length=120), nullable=False),
     sa.Column('asana_focus', sa.String(length=120), nullable=False),
     sa.Column('level', sa.String(length=120), nullable=False),
@@ -112,7 +112,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=120), nullable=False),
     sa.Column('subtitle', sa.String(length=120), nullable=False),
-    sa.Column('description', sa.String(length=120), nullable=False),
+    sa.Column('description', sa.String(length=500), nullable=False),
     sa.Column('link', sa.String(length=120), nullable=False),
     sa.Column('asana_focus', sa.String(length=120), nullable=False),
     sa.Column('level', sa.String(length=120), nullable=False),
@@ -129,7 +129,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=120), nullable=False),
     sa.Column('subtitle', sa.String(length=120), nullable=False),
-    sa.Column('description', sa.String(length=120), nullable=False),
+    sa.Column('description', sa.String(length=500), nullable=False),
     sa.Column('link', sa.String(length=120), nullable=False),
     sa.Column('asana_focus', sa.String(length=120), nullable=False),
     sa.Column('level', sa.String(length=120), nullable=False),
@@ -166,7 +166,6 @@ def upgrade():
     sa.Column('date_of_birth', sa.String(length=120), nullable=False),
     sa.Column('email', sa.String(length=120), nullable=False),
     sa.Column('password', sa.String(length=80), nullable=False),
-    sa.Column('role', sa.Enum('Student', 'Instructor', name='role'), nullable=True),
     sa.Column('id_subscription', sa.Integer(), nullable=True),
     sa.Column('subscription_start_date', sa.String(length=120), nullable=True),
     sa.Column('last_payment_date', sa.String(length=120), nullable=True),
@@ -183,7 +182,7 @@ def upgrade():
     sa.Column('name', sa.String(length=120), nullable=False),
     sa.Column('subtitle', sa.String(length=120), nullable=False),
     sa.Column('description', sa.String(length=120), nullable=False),
-    sa.Column('link', sa.String(length=120), nullable=False),
+    sa.Column('link', sa.String(length=500), nullable=False),
     sa.Column('asana_focus', sa.String(length=120), nullable=False),
     sa.Column('level', sa.String(length=120), nullable=False),
     sa.Column('duration', sa.String(length=120), nullable=False),
